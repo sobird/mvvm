@@ -1,0 +1,15 @@
+{
+  "name": "mvvm",
+  "version": "0.0.1",
+  "description": "Model-View-ViewModel 简单实现",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mvvm",
+    "vue"
+  ],
+  "author": "sobird",
+  "license": "MIT"
+}
