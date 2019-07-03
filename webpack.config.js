@@ -8,8 +8,10 @@
  */
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/mvvm.js',
   output: {
-  	filename: 'mvvm.js'
+  	filename: 'mvvm.js',
+  	library: 'Mvvm',
+  	libraryTarget: 'umd'
   }
 };
