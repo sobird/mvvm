@@ -6,6 +6,30 @@
   <script src="./dist/mvvm.js"></script>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+  	<h1>MVVM测试</h1>
+  	<p>{{message}}</p>
+  </div>
+  <script type="text/javascript">
+  	var vm = new Mvvm({
+      el: '#app',
+      data: {
+      	message: 'Hello, MVVM!',
+      },
+      computed: {
+        getMessage: function() {
+          return this.message;
+        }
+      },
+
+      methods: {
+      	clickBtn: function(e) {
+          console.log(e);
+        }
+      }
+    });
+
+    console.log(vm);
+  </script>
 </body>
 </html>

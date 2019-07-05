@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue官方示例</title>
+	<script type="text/javascript" src="https://cn.vuejs.org/js/vue.js"></script>
+  <script type="text/javascript" src="http://erik.eae.net/simplehtmlparser/simplehtmlparser.js"></script>
+</head>
+<body>
+  <div id="app">
+  	<p>{{message}}</p>
+  	<p>{{getMessage}}</p>
+  </div>
+
+  <script type="text/javascript">
+  	var vm = new Vue({
+  	  el: '#app',
+  	  data: {
+  	  	message: 'hello, vue!'
+  	  },
+  	  computed: {
+        getMessage: function() {
+          return this.message;
+        }
+      },
+  	});
+  </script>
+</body>
+</html>
