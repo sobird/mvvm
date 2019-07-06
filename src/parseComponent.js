@@ -115,8 +115,8 @@ export default function parseComponent (content, options) {
   return sfc;
 }
 
-var fs = require('fs');
-var html = fs.readFileSync('../sfc.vue', 'utf8');
-var result = parseComponent(html, {});
+// var fs = require('fs');
+// var html = fs.readFileSync('../sfc.vue', 'utf8');
+// var result = parseComponent(html, {});
 
-console.log(result);
+// console.log(result);
