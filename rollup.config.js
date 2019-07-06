@@ -8,9 +8,9 @@
  */
 
 export default {
-  input: 'src/parseComponent.js',
+  input: 'src/mvvm.js',
   output: {
-  	file: 'dist/parseComponent.js',
+  	file: 'dist/mvvm.js',
   	format: 'umd',
   	name: 'Mvvm'
   }
