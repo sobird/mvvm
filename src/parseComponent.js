@@ -13,7 +13,7 @@ var splitRE = /\r?\n/g;
 var replaceRE = /./g;
 var isSpecialTag = makeMap('script,style,template', true);
 
-export default function parseComponent (content, options) {
+export function parseComponent (content, options) {
   if ( options === void 0 ) {
   	options = {};
   }

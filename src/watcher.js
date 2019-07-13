@@ -10,6 +10,11 @@ import Dep, { pushTarget, popTarget } from './dep'
 
 var uid = 0;
 
+/**
+ * A watcher parses an expression, collects dependencies,
+ * and fires callback when the expression value changes.
+ * This is used for both the $watch() api and directives.
+ */
 export default function Watcher (vm, expOrFn, cb, options, isRenderWatcher) {
   this.vm = vm;
   if (isRenderWatcher) {
@@ -28,7 +33,7 @@ export default function Watcher (vm, expOrFn, cb, options, isRenderWatcher) {
   if (typeof expOrFn === 'function') {
     this.getter = expOrFn;
   } else {
-    this.getter = this.parsePath(expOrFn.trim());
+    this.getter = parsePath(expOrFn.trim());
   }
 
   this.value = this.get();
@@ -37,8 +42,8 @@ export default function Watcher (vm, expOrFn, cb, options, isRenderWatcher) {
 Watcher.prototype.get = function () {
   pushTarget(this);
   var value = this.getter.call(this.vm, this.vm);
-  Dep.target = null;
 
+  popTarget();
   this.cleanupDeps();
 
   return value;

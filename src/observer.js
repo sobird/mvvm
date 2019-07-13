@@ -8,6 +8,12 @@
  */
 import Dep from './dep';
 
+/**
+ * Observer class that is attached to each observed
+ * object. Once attached, the observer converts the target
+ * object's property keys into getter/setters that
+ * collect dependencies and dispatch updates.
+ */
 export default function Observer (value) {
   this.value = value;
   this.dep = new Dep();
@@ -24,13 +30,25 @@ Observer.prototype.walk = function (obj) {
 };
 
 /**
+ * Walk through all properties and convert them into
+ * getter/setters. This method should only be called when
+ * value type is Object.
+ */
+Observer.prototype.walk = function walk(obj) {
+  var keys = Object.keys(obj);
+  for (var i = 0; i < keys.length; i++) {
+    defineReactive(obj, keys[i]);
+  }
+};
+
+/**
  * Observe a list of Array items.
  */
-Observer.prototype.observeArray (items) {
-  for (let i = 0, l = items.length; i < l; i++) {
-    observe(items[i])
+Observer.prototype.observeArray = function observeArray(items) {
+  for (var i = 0, l = items.length; i < l; i++) {
+    observe(items[i]);
   }
-}
+};
 
 /**
  * Attempt to create an observer instance for a value,
@@ -66,7 +84,7 @@ export function defineReactive (obj, key, val, customSetter, shallow) {
     val = obj[key]
   }
 
-  let childOb = !shallow && observe(val)
+  let childOb = !shallow && observe(val);
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
@@ -91,14 +109,14 @@ export function defineReactive (obj, key, val, customSetter, shallow) {
       }
       /* eslint-enable no-self-compare */
       if (customSetter) {
-        customSetter()
+        customSetter();
       }
       // #7981: for accessor properties without setter
       if (getter && !setter) return
       if (setter) {
-        setter.call(obj, newVal)
+        setter.call(obj, newVal);
       } else {
-        val = newVal
+        val = newVal;
       }
       childOb = !shallow && observe(newVal)
       dep.notify()
@@ -118,3 +136,4 @@ function dependArray (value) {
       dependArray(e);
     }
   }
+}
