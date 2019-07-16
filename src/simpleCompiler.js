@@ -128,6 +128,8 @@ var directives = {
       that._setVMVal(exp, newValue);
       val = newValue;
     });
+
+    this.$bind(node, exp, 'model');
   },
   html: function(node, exp) {
     this.$bind(node, exp, 'html');
@@ -171,6 +173,10 @@ var DOMPatcher = {
 
       vifNodeMaps.set(node, commentNode);
     }
+  },
+
+  model: function (node, value) {
+    node.value = value;
   }
 };
 

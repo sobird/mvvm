@@ -22,13 +22,6 @@ export default function Observer (value) {
   this.walk(value);
 }
 
-Observer.prototype.walk = function (obj) {
-  const keys = Object.keys(obj)
-  for (let i = 0; i < keys.length; i++) {
-    defineReactive(obj, keys[i])
-  }
-};
-
 /**
  * Walk through all properties and convert them into
  * getter/setters. This method should only be called when
@@ -70,11 +63,11 @@ export function observe (value, asRootData) {
  * Define a reactive property on an Object.
  */
 export function defineReactive (obj, key, val, customSetter, shallow) {
-  const dep = new Dep()
+  const dep = new Dep();
 
   const property = Object.getOwnPropertyDescriptor(obj, key)
   if (property && property.configurable === false) {
-    return
+    return;
   }
 
   // cater for pre-defined getter/setters
@@ -89,7 +82,7 @@ export function defineReactive (obj, key, val, customSetter, shallow) {
     enumerable: true,
     configurable: true,
     get: function reactiveGetter () {
-      const value = getter ? getter.call(obj) : val
+      const value = getter ? getter.call(obj) : val;
       if (Dep.target) {
         dep.depend()
         if (childOb) {

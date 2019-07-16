@@ -10,16 +10,34 @@
   <div id="app">
   	<h1>MVVM测试</h1>
   	<p>{{message}}</p>
+    <p>message2: {{message}}</p>
     <div v-html="html"></div>
 
     <div v-if="vif">v-if指令测试</div>
 
     <div v-if="vif2">v-if指令测试22</div>
 
-    <input type="text" v-model="message" name="" />
+    <input id="test" type="color" v-model="message" name="" />
+    <output>{{message}}</output>
+
+    <p>{{arr}}</p>
 
     <button v-on:click="clickBtn">按钮</button>
   </div>
+  <script type="text/javascript">
+    var observer = new MutationObserver(function(mutations, observer) {
+      console.log(arguments);
+    });
+
+    var app = document.querySelector('#app');
+
+    var  options = {
+      'childList': true,
+      'attributes':true
+    } ;
+
+    observer.observe(app, options);
+  </script>
   <script type="text/javascript">
   	var vm = new Mvvm({
       el: '#app',
@@ -27,7 +45,9 @@
       	message: 'Hello, MVVM!',
         html: '<div style="color: red;">这是一段HTML</div>',
         vif: true,
-        vif2: false
+        vif2: false,
+        test: 'test',
+        arr: [1,2,3]
       },
       computed: {
         getMessage: function() {
