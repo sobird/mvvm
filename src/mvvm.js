@@ -10,6 +10,7 @@
 import Watcher from './watcher';
 import { observe } from './observer';
 import SimpleCompiler from './simpleCompiler';
+import { nextTick } from './nextTick';
 
 var uid = 0;
 
@@ -114,3 +115,10 @@ function isReserved (str) {
   var c = (str + '').charCodeAt(0);
   return c === 0x24 || c === 0x5F;
 }
+
+
+Mvvm.nextTick = nextTick;
+
+Mvvm.prototype.$nextTick = function (fn) {
+  return nextTick(fn, this);
+};

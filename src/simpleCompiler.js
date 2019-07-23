@@ -175,6 +175,7 @@ var DOMPatcher = {
     }
   },
 
+  // v-model
   model: function (node, value) {
     node.value = value;
   }

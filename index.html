@@ -62,6 +62,16 @@
       }
     });
 
+    // vm.$watch('vif', function(newValue, oldValue) {
+    //   console.log('vif', newValue);
+    // });
+    
+    vm.$nextTick(function() {
+      console.log(1111);
+    }); 
+    
+
+
     console.log(vm);
   </script>
 </body>
