@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>mvvm源码解析示例</title>
   <script src="./dist/mvvm.js"></script>
 </head>
+
 <body>
   <!-- 这是注释 -->
   <div id="app">
-  	<h1>MVVM测试</h1>
-  	<p>{{message}}</p>
+    <h1>MVVM测试</h1>
+    <p>{{message}}</p>
     <p>message2: {{message}}</p>
     <div v-html="html"></div>
 
@@ -25,54 +27,75 @@
     <button v-on:click="clickBtn">按钮</button>
   </div>
   <script type="text/javascript">
-    var observer = new MutationObserver(function(mutations, observer) {
+    var observer = new MutationObserver(function (mutations, observer) {
       console.log(arguments);
     });
 
     var app = document.querySelector('#app');
 
-    var  options = {
+    var options = {
       'childList': true,
-      'attributes':true
-    } ;
+      'attributes': true
+    };
 
     observer.observe(app, options);
   </script>
   <script type="text/javascript">
-  	var vm = new Mvvm({
+    var options = {
       el: '#app',
       data: {
-      	message: 'Hello, MVVM!',
+        message: 'Hello, MVVM!',
         html: '<div style="color: red;">这是一段HTML</div>',
         vif: true,
         vif2: false,
         test: 'test',
-        arr: [1,2,3]
+        arr: [1, 2, 3]
       },
       computed: {
-        getMessage: function() {
+        getMessage: function () {
           return this.message;
         }
       },
 
       methods: {
-      	clickBtn: function(e) {
+        clickBtn: function (e) {
           this.vif = false;
         }
       }
-    });
+    };
+
+    var vm = new Mvvm(options);
+
+    Object.freeze(options.data);
 
     // vm.$watch('vif', function(newValue, oldValue) {
     //   console.log('vif', newValue);
     // });
-    
-    vm.$nextTick(function() {
-      console.log(1111);
-    }); 
-    
+
+    vm.$nextTick(function () {
+      //console.log(1111);
+    });
 
 
-    console.log(vm);
+
+
+    //
+    //
+    var worker = new Worker('work.js');
+    worker.postMessage('Hello World');
+    worker.postMessage({ method: 'echo', args: ['Work'] });
+
+
+    worker.onmessage = function (event) {
+      console.log('Received message ' + event.data);
+      doSomething();
+    }
+
+    function doSomething() {
+      // 执行任务
+      worker.postMessage('Work done!');
+    }
   </script>
 </body>
+
 </html>
