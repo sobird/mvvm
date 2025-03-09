@@ -1,11 +1,13 @@
-console.log('hello');
+import Sobird from './Sobird';
 
-function add(a: number, b: number) {
-  return a + b;
-}
+const App = (props) => {
+  return <div>Hello</div>;
+};
 
-console.log(add(1, 2));
+console.log('App', App);
 
-const h1 = <h1>hell</h1>;
+const ddd = <h1>dddd</h1>;
 
-console.log('h1', h1);
+console.log('ddd', ddd);
+
+console.log('Sobird', Sobird);
