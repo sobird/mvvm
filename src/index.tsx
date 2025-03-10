@@ -1,27 +1,26 @@
-import Sobird from './Sobird';
+import Myact from './Myact';
 
-const App = (props) => {
+function Counter() {
+  const [state, setState] = Myact.useState(1);
+  const handleClick = () => {
+    setTimeout(() => {
+      console.log('state', state);
+      // setState(state + 1); // 这里的 count 始终是初始值 0
+    }, 1000);
+  };
   return (
     <div>
-      <h1>Hello</h1>
-      <ul>
-        {new Array(5).fill(0).map((item, index) => {
-          return (
-            <li>
-              item,
-              {index}
-            </li>
-          );
-        })}
-      </ul>
+      <h1 onClick={() => { return setState((c) => { return c + 1; }); }}>
+        Count:
+        {' '}
+        {state}
+      </h1>
+      <button onClick={handleClick}>Increment</button>
     </div>
   );
-};
+}
 
-console.log('App', App);
+const element = <Counter />;
 
-const ddd = <h1>dddd</h1>;
-
-console.log('ddd', ddd);
-
-console.log('Sobird', Sobird);
+const container = document.getElementById('root');
+Myact.render(element, container);
